@@ -16,6 +16,8 @@ public class Main {
 
         Options options = new Options();
         options.addOption("i", "input", true, "input json data");
+        options.addOption("p1", "param1", true, "input string parameter 1");
+        options.addOption("p2", "param2", true, "input string parameter 2");
         options.addOption("h", "help", false, "print this message");
 
         CommandLineParser commandLineParser = new DefaultParser();
@@ -29,12 +31,21 @@ public class Main {
             }
 
             if (commandLine.hasOption("input")) {
-                // 옵션 값을 반환
                 String input = commandLine.getOptionValue("input");
                 log.info("input={}", input);
 
                 JenkinsRequestDto jenkinsRequestDto = objectMapper.readValue(input, JenkinsRequestDto.class);
                 log.info("jenkinsRequestDto={}", jenkinsRequestDto);
+            }
+
+            if (commandLine.hasOption("param1")) {
+                String param1 = commandLine.getOptionValue("param1");
+                log.info("param1={}", param1);
+            }
+
+            if (commandLine.hasOption("param2")) {
+                String param2 = commandLine.getOptionValue("param2");
+                log.info("param2={}", param2);
             }
         } catch (ParseException | JsonProcessingException e) {
             throw new RuntimeException(e);
